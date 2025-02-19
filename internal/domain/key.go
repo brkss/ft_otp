@@ -3,6 +3,6 @@ package domain
 
 
 type Key struct {
-	Secret string;
+	Secret []byte;
 	Counter uint64;
 }

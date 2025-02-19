@@ -1,4 +1,4 @@
-package app
+package domain
 
 import (
 	"crypto/hmac"
@@ -9,6 +9,7 @@ import (
 
 func GenerateHOTP(secret string, counter uint64) (uint32, error) {
 
+	// convert counter (time) to 8 byte bug endian 
 	var b [8]byte;
 	binary.BigEndian.PutUint64(b[:], counter);
 
