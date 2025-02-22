@@ -57,7 +57,5 @@ func (uc *generateKeyFileUsecase) Execute(input GenerateKeyFileInput) error {
 		Counter: 0,
 	}
 
-	uc.repository.Save(key);
-
-	return nil;
+	return uc.repository.Save(key);
 }

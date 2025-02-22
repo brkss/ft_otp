@@ -4,10 +4,11 @@ import (
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/binary"
+	"fmt"
 )
 
 
-func GenerateHOTP(secret string, counter uint64) (uint32, error) {
+func GenerateHOTP(secret string, counter uint64) (string, error) {
 
 	// convert counter (time) to 8 byte bug endian 
 	var b [8]byte;
@@ -17,7 +18,7 @@ func GenerateHOTP(secret string, counter uint64) (uint32, error) {
 	h := hmac.New(sha1.New, []byte(secret));
 	_, err := h.Write(b[:]);
 	if err != nil {
-		return 0, err;
+		return "", err;
 	}
 	
 	hash := h.Sum(nil);
@@ -30,5 +31,5 @@ func GenerateHOTP(secret string, counter uint64) (uint32, error) {
 
 	otp := binCode % 1000000;
 
-	return otp, nil;
+	return fmt.Sprintf("%06d", otp), nil;
 }
