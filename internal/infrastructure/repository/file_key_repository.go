@@ -67,7 +67,7 @@ func buildPlainText(key *domain.Key) ([]byte, error) {
 
 func parsePlainText(data []byte) (*domain.Key, error) {
 	if len(data) < 12 {
-		return nil, errors.New("data too short !")
+		return nil, errors.New("data too short")
 	}
 
 	secretLen := binary.BigEndian.Uint32(data[:4])
